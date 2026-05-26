@@ -139,6 +139,8 @@ uname -a
 sudo -l
 ```
 
+列出用户权限或检查某个特定命令
+
 ![image-20260526220256016](Mercury.assets/image-20260526220256016.png)
 
 ------
@@ -154,3 +156,7 @@ sudo -l
 本靶机更注重这种方法
 
 #### 利用 Sudo 配置缺陷进行环境变量劫持
+
+![image-20260526221024003](Mercury.assets/image-20260526221024003.png)
+
+可以知道linuxmaster用户可以root用户的权限运行/usr/bin/check_syslog.sh
