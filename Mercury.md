@@ -123,6 +123,19 @@ su linuxmaster
 先进行信息收集
 
 ```
-find / -perm -u
+find / -perm -u=s -type f 2>/dev/null
+```
+
+![image-20260526220115107](Mercury.assets/image-20260526220115107.png)
+
+```
+id
+uname -a
+```
+
+![image-20260526220205766](Mercury.assets/image-20260526220205766.png)
+
+```
+sudo -l
 ```
 
