@@ -99,3 +99,11 @@ gobuster dir -u "http://192.168.174.135:8080" -w "/usr/share/wordlists/dirbuster
 ![image-20260526215440563](Mercury.assets/image-20260526215440563.png)
 
 感觉这个webmaster最可疑，先尝试ssh登录这个
+
+![image-20260526215636613](Mercury.assets/image-20260526215636613.png)
+
+第一个flag到手，接下来查看用户下另一个目录的信息
+
+![image-20260526215729482](Mercury.assets/image-20260526215729482.png)
+
+在notes.txt中看到两个用户信息，webmaster我们有，猜测linuxmaster是
