@@ -58,4 +58,6 @@ gobuster dir -u "http://192.168.174.135:8080" -w "/usr/share/wordlists/dirbuster
 
 ![image-20260526212013869](Mercury.assets/image-20260526212013869.png)
 
-瞬间觉得此处应该存在sql注入
+瞬间觉得此处应该存在sql注入（这里是“数字型注入“，不是”字符型注入“）
+
+![image-20260526213302216](Mercury.assets/image-20260526213302216.png)
