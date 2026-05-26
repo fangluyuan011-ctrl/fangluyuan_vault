@@ -106,4 +106,10 @@ gobuster dir -u "http://192.168.174.135:8080" -w "/usr/share/wordlists/dirbuster
 
 ![image-20260526215729482](Mercury.assets/image-20260526215729482.png)
 
-在notes.txt中看到两个用户信息，webmaster我们有，猜测linuxmaster是
+在notes.txt中看到两个用户信息，webmaster我们有，猜测linuxmaster是更高级的用户，有更多的信息
+
+所以先进行base64解码
+
+![image-20260526215915210](Mercury.assets/image-20260526215915210.png)
+
+得到密码
