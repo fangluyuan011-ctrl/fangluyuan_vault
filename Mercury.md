@@ -113,3 +113,16 @@ gobuster dir -u "http://192.168.174.135:8080" -w "/usr/share/wordlists/dirbuster
 ![image-20260526215915210](Mercury.assets/image-20260526215915210.png)
 
 得到密码
+
+```
+su linuxmaster
+```
+
+提权成功
+
+先进行信息收集
+
+```
+find / -perm -u
+```
+
