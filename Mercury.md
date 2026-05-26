@@ -172,6 +172,6 @@ cat /usr/bin/check_syslog.sh
 知道主要是通过tail命令进行运作，这种情况我们可以实行PATH劫持
 
 ```
-
+echo 
 ```
 
