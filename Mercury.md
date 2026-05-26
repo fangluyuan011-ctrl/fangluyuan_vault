@@ -160,3 +160,13 @@ sudo -l
 ![image-20260526221024003](Mercury.assets/image-20260526221024003.png)
 
 可以知道linuxmaster用户可以root用户的权限运行/usr/bin/check_syslog.sh
+
+```
+cat /usr/bin/check_syslog.sh
+```
+
+查看文件
+
+![image-20260526221320429](Mercury.assets/image-20260526221320429.png)
+
+知道主要是通过tail命令进行运作，这样
