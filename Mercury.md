@@ -170,3 +170,8 @@ cat /usr/bin/check_syslog.sh
 ![image-20260526221320429](Mercury.assets/image-20260526221320429.png)
 
 知道主要是通过tail命令进行运作，这种情况我们可以实行PATH劫持
+
+```
+
+```
+
