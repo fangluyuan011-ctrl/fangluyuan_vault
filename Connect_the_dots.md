@@ -258,6 +258,8 @@ find / -writable -type f 2>/dev/null | grep -v proc | grep -v sys
 
 ![image-20260609204058085](Connect_the_dots.assets/image-20260609204058085.png)
 
+![image-20260609205740401](Connect_the_dots.assets/image-20260609205740401.png)
+
 ------
 
 在实际的靶机中，我会遇到这种情况![image-20260609205059407](Connect_the_dots.assets/image-20260609205059407.png)
@@ -292,3 +294,4 @@ whereis getcap
 
 ------
 
+也就是说tar拥有绕过任何权限直接运行的权力，所以我们ke'y
