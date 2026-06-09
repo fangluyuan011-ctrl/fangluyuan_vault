@@ -296,3 +296,18 @@ whereis getcap
 
 也就是说tar拥有绕过任何权限直接运行的权力，所以我们可以直接用tar把root用户的目录遍历，压缩成一个压缩包，再进行查看
 
+这里再复习一下tar命令
+
+![image-20260609210433924](Connect_the_dots.assets/image-20260609210433924.png)
+
+```
+tar -czvf root.tar.gz /root
+```
+
+```
+tar -cxvf root.tar.gz
+```
+
+![image-20260609210554260](Connect_the_dots.assets/image-20260609210554260.png)
+
+至此，成功拿到root.txt
