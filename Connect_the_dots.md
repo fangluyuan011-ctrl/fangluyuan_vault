@@ -257,3 +257,38 @@ find / -writable -type f 2>/dev/null | grep -v proc | grep -v sys
 在 Linux 提权枚举中，`find / -perm -4000` 是找 SUID 文件的“常规武器”，而 **`getcap`** 则是发现另一种高风险配置——**文件能力（Capabilities）**——的“精准探测器”
 
 ![image-20260609204058085](Connect_the_dots.assets/image-20260609204058085.png)
+
+------
+
+在实际的靶机中，我会遇到这种情况![image-20260609205059407](Connect_the_dots.assets/image-20260609205059407.png)
+
+这种的话就先
+
+```
+whereis getcap
+```
+
+查找一下这个命令的位置，然后直接
+
+```
+/usr/sbin/getcap -r / 2>/dev/null
+```
+
+就可以正常使用了
+
+可以看到tar命令拥有绕过文件读及目录遍历权限
+
+------
+
+
+
+- 这里解释一下各输出格式解析
+
+![image-20260609205509774](Connect_the_dots.assets/image-20260609205509774.png)
+
+![image-20260609205519892](Connect_the_dots.assets/image-20260609205519892.png)
+
+经常会两两结合
+
+------
+
