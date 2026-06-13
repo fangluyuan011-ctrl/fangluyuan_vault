@@ -28,4 +28,16 @@ nmap --script=vuln -p22,80 192.168.174.147
 
 ![image-20260613143922683](Me_and_my_girlfriend.assets/image-20260613143922683.png)
 
-意思是只有
+意思是只有本地ip可以访问，也就是localhost或127.0.0.1
+
+这里要么是burpsuite一直抓包，每一步都要加一个
+
+```
+X-Forwarded-For: 127.0.0.1
+```
+
+要么是使用一个小插件
+
+![image-20260613144326058](Me_and_my_girlfriend.assets/image-20260613144326058.png)
+
+![image-20260613144340305](Me_and_my_girlfriend.assets/image-20260613144340305.png)
