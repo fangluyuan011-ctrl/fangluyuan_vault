@@ -23,3 +23,9 @@ nmap --script=vuln -p22,80 192.168.174.147
 ![image-20260611213730123](Me_and_my_girlfriend.assets/image-20260611213730123.png)
 
 枚举出三个目录/robots.txt,/config,/misc
+
+首先我们先访问一下这个网页
+
+![image-20260613143922683](Me_and_my_girlfriend.assets/image-20260613143922683.png)
+
+意思是只有
