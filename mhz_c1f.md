@@ -188,3 +188,29 @@ sudo -l
 ```
 
 ![image-20260718232932131](mhz_c1f.assets/image-20260718232932131.png)
+
+1. 第一个 ALL： (ALL : xxx)  → 括号左半，可切换目标用户
+
+- 含义：执行 sudo -u 用户名 时，能切换到哪个系统用户
+- 取值示例：
+- (ALL) ：可以切换系统里任何用户（root、www-data、mysql等）
+- (root) ：仅能切换root，不能切其他普通用户
+- (www-data) ：只能切换网站服务用户，拿不到root
+
+2. 第二个 ALL： (xxx : ALL)  → 括号右半，可切换目标用户组
+
+- 含义：执行 sudo -g 用户组 时，能切换到哪个用户组
+- 取值示例：
+- (:ALL) ：可以切换系统任意用户组（root组、docker组等）
+- (:root) ：仅能切换root组
+- (:docker) ：仅能切换docker组
+
+3. 末尾的 ALL：命令段，允许执行的程序
+
+- 含义：当前用户能sudo运行哪些命令
+- 取值示例：
+- ALL ：无限制，系统所有二进制程序都能sudo执行
+- /usr/bin/cat ：仅允许sudo cat，其他命令无权
+- !/usr/bin/su, ALL ：允许所有命令，但禁止sudo su切换root
+
+所以我们可以直接切换到root用户
