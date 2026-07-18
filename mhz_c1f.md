@@ -213,4 +213,6 @@ sudo -l
 - /usr/bin/cat ：仅允许sudo cat，其他命令无权
 - !/usr/bin/su, ALL ：允许所有命令，但禁止sudo su切换root
 
-所以我们可以直接切换到root用户
+所以我们可以直接切换到root用户![image-20260718233241383](mhz_c1f.assets/image-20260718233241383.png)
+
+成功拿到flag
