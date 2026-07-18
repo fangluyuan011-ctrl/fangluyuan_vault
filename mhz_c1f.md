@@ -134,3 +134,10 @@ stty raw -echo; fg
 - find / -perm -u=s -type f 2>/dev/null
 - ![image-20260718225801508](mhz_c1f.assets/image-20260718225801508.png)
 - getcap -r / 2>/dev/null
+- ![image-20260718225927846](mhz_c1f.assets/image-20260718225927846.png)
+- cat /etc/crontab
+- ![image-20260718230008340](mhz_c1f.assets/image-20260718230008340.png)
+
+经过以上很多尝试均没有结果
+
+接下来尝试一下
