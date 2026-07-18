@@ -183,3 +183,8 @@ steghide extract -sf spinning\ the\ wool.jpeg
 su mhz_c1f
 ```
 
+```
+sudo -l
+```
+
+![image-20260718232932131](mhz_c1f.assets/image-20260718232932131.png)
