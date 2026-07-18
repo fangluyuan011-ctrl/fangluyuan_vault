@@ -154,3 +154,9 @@ ls -la
 ![image-20260718230220445](mhz_c1f.assets/image-20260718230220445.png)
 
 发现里面有四张图片，而且我们有读的权限
+
+```
+scp first_stage@192.168.174.152:/home/mhz_c1f/Paintings /exam
+```
+
+(这是ssh中下载连接机器文件的命令，前提是我们要有对应文件)
