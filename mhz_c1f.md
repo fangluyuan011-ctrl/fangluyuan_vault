@@ -161,4 +161,25 @@ scp first_stage@192.168.174.152:/home/mhz_c1f/Paintings /exam
 
 (这是ssh中下载连接机器文件的命令，前提是我们要有对应文件的读权限)
 
-- 尝试了file，strings，binwalk，exiftool均没有关键信息，
+- 尝试了file，strings，binwalk，exiftool均没有关键信息，接下来尝试是否有隐写
+
+```
+steghide info <filename>（有空格的话需要加\来表示转义）
+```
+
+![image-20260718232446907](mhz_c1f.assets/image-20260718232446907.png)
+
+因为我们没有密码，四个都尝试一下后发现spinning the wool.jpeg可以直接探测，并且存在remb2.txt
+
+```
+steghide extract -sf spinning\ the\ wool.jpeg
+```
+
+![image-20260718232701589](mhz_c1f.assets/image-20260718232701589.png)
+
+得到remb2.txt的内容
+
+```
+su mhz_c1f
+```
+
