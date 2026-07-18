@@ -120,6 +120,9 @@ stty raw -echo; fg
 
 随后按以下步骤依次查看
 
+- sudo -l
+- ![image-20260718225833225](mhz_c1f.assets/image-20260718225833225.png)
+
 - id
 - ![image-20260718225624751](mhz_c1f.assets/image-20260718225624751.png)
 
@@ -130,4 +133,4 @@ stty raw -echo; fg
 - ![image-20260718225718979](mhz_c1f.assets/image-20260718225718979.png)
 - find / -perm -u=s -type f 2>/dev/null
 - ![image-20260718225801508](mhz_c1f.assets/image-20260718225801508.png)
-- getcap 
+- getcap -r / 2>/dev/null
