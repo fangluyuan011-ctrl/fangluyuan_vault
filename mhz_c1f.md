@@ -127,4 +127,7 @@ stty raw -echo; fg
 - ![image-20260718225640782](mhz_c1f.assets/image-20260718225640782.png)
 
 - find / -writable -type f 2>/dev/null | grep -v sys | grep -v proc
-- 
+- ![image-20260718225718979](mhz_c1f.assets/image-20260718225718979.png)
+- find / -perm -u=s -type f 2>/dev/null
+- ![image-20260718225801508](mhz_c1f.assets/image-20260718225801508.png)
+- getcap 
