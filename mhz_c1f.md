@@ -121,6 +121,10 @@ stty raw -echo; fg
 随后按以下步骤依次查看
 
 - id
-- 
+- ![image-20260718225624751](mhz_c1f.assets/image-20260718225624751.png)
+
 - uname -a
-- find / -writable
+- ![image-20260718225640782](mhz_c1f.assets/image-20260718225640782.png)
+
+- find / -writable -type f 2>/dev/null | grep -v sys | grep -v proc
+- 
