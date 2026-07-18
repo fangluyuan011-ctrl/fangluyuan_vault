@@ -108,4 +108,7 @@ export TERM=xterm
 stty raw -echo; fg
 ```
 
-()
+(这个靶机只用第一条命令就可以正常使用了)
+
+##### 先收集信息
+
