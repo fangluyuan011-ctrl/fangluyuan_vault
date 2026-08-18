@@ -243,9 +243,9 @@ drush user-password admin --password="123"
 dc7user用户的密码也可以用drush进行更改，有时可能会报错连接不上（无法初始化）数据库的问题，可以尝试看下数据库的状态，或者重启
 
 ```
-drush sql-connect
-my
-systemctl status mysql
+drush sql-connect(测试Drush能否连接数据库)
+mysql -u dc7user -p -h localhost（直接测试mysql连接）
+systemctl status mysql（检查）
 systemctl 
 ```
 
