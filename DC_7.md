@@ -80,3 +80,11 @@ gobuster dir -u "http://192.168.174.163" -w /usr/share/wordlists/dirbuster/direc
 这个@DC7USER直接在搜索引擎搜索，可以直接搜索出github上的一个用户，然后进去发现包含许多源码的文件，这就是利用了社工信息收集，确实挺新颖的哈![image-20260818165156884](DC_7.assets/image-20260818165156884.png)
 
 在config.php中发现了用于连接mysql的php内置函数，里面有用户名和密码，尝试一下能不能登录Drupal或者连接ssh
+
+![image-20260818171122615](DC_7.assets/image-20260818171122615.png)
+
+成功进入，进行了一系列的信息收集，没有可以利用的地方，然后开始查看我们当前用户有权限的文件，以及去/home等目录查找更多利于提权的信息
+
+![image-20260818171305478](DC_7.assets/image-20260818171305478.png)
+
+发现未知文件mbox和backups目录
