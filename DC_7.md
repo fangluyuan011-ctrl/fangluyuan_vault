@@ -155,3 +155,9 @@ gpg: symmetric encryption ... failed: File exists
 定时执行了/opt/scripts/backups.sh脚本
 
 - 因为这个邮件的发送人和接收人都是自己，所以我们也可以直接查看收件箱，直接执行命令mail![image-20260818173529967](DC_7.assets/image-20260818173529967.png)
+
+（我们在/etc/crontab种没有看到这个任务，说明他有可能是root用户的定时任务）
+
+- 查看/opt/scripts/backups.sh
+
+![image-20260818174537209](DC_7.assets/image-20260818174537209.png)
