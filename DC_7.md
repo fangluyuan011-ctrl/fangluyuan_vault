@@ -240,4 +240,10 @@ drush user-password admin --password="123"
 
 就可以把admin用户的密码改动，然后我们就可以直接在网站上登录了（其实我不知道为什么改admin，毕竟我自己做的时候从来没见过这个用户，但是看别人的wp都是这样，也许是像wordpress这样的流行CMS默认管理员用户都是admin，所以才有这样的做法吧）![image-20260818211859663](DC_7.assets/image-20260818211859663.png)
 
-dc7user用户的密码也可以用drush进行更改，有时可能会报错
+dc7user用户的密码也可以用drush进行更改，有时可能会报错连接不上（无法初始化）数据库的问题，可以尝试看下数据库的状态，或者重启
+
+```
+systemctl status mysql
+syst
+```
+
