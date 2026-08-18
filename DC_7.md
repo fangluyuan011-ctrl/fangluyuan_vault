@@ -175,3 +175,5 @@ GPG（GNU Privacy Guard）是 OpenPGP 标准的开源实现，用于**加密、�
 - 解密：`gpg --decrypt file.gpg`
 - 对称加密：`gpg --symmetric file`
 - 破解私钥密码：`gpg2john private.key > hash && john hash`
+
+在这个靶机中有个另外的参数--pinentry-mode loopback --passphrase PickYourOwnPassword，意思是不需要交互式输入密码，直接在命令行中输入
