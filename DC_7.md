@@ -88,3 +88,70 @@ gobuster dir -u "http://192.168.174.163" -w /usr/share/wordlists/dirbuster/direc
 ![image-20260818171305478](DC_7.assets/image-20260818171305478.png)
 
 发现未知文件mbox和backups目录
+
+- 查看mbox文件![image-20260818172554177](DC_7.assets/image-20260818172554177.png)
+
+发现这是一个邮件，由于第一次遇到这个种靶机，我要区别一下怎么看出这是一个原始邮件（EML格式），而且他是定时的
+
+------
+
+## mail
+
+### 1. 标准的“邮件头”格式（最核心标志）
+
+邮件头是一系列以**“字段名: 值”**形式出现的关键信息，位于文本最顶部。截图里包含这些：
+
+- **`From: root@dc-7 (Cron Daemon)`** → 明确说明发件人是谁。
+- **`To: root@dc-7`** → 明确说明收件人是谁。
+- **`Subject: Cron <root@dc-7> /opt/scripts/backups.sh`** → 这是邮件主题。
+- **`Date: Thu, 29 Aug 2019 17:00:22 +1000`** → 发送时间。
+
+普通日志（比如 `/var/log/syslog`）通常是以时间戳开头，不会有这种 `From:`、`To:`、`Subject:` 这种标准的邮件头。
+
+### ✅ 2. 路由追踪信息（Received 字段）
+
+文件中间有几行以 `Received: from` 开头的部分，这是记录邮件经过的服务器路径。例如：
+`Received: from root by dc-7 with local (Exim 4.89)`
+这表示邮件是由 `root` 用户通过本地的 Exim 邮件服务（本地投递）生成的。这是内部邮件投递的典型特征。
+
+### ✅ 3. 邮件正文与头部的“空行分隔”
+
+仔细观察，你会发现邮件头和正文之间有一个**空行**。
+头部是：
+
+text
+
+```
+Subject: Cron <root@dc-7> /opt/scripts/backups.sh
+MIME-Version: 1.0
+...
+Message-Id: <E113EPu-0000CV-5C@dc-7>
+Date: Thu, 29 Aug 2019 17:00:22 +1000
+```
+
+接着空一行，然后是正文：
+
+text
+
+```
+Database dump saved to /home/dc7user/backups/website.sql    [success]
+gpg: symmetric encryption ... failed: File exists
+```
+
+这个**空行**是标准的邮件协议（RFC 822）规定的，用于区分控制信息和内容。
+
+- 然后我们也可以执行mail命令来查看邮件
+
+  ------
+
+  1. **扫一眼开头两行**：看有没有 `From` 或 `Return-path`。
+  2. **找 `Subject` 行**：如果有，说明有人或系统定时任务（Cron）发了一封主题为执行备份脚本的邮件。
+  3. **看收件人**：如果都是发给 `root@dc-7`，说明这是系统产生的通知，通常保存在收件箱里。
+
+我们可以通过这三个步骤快速判断
+
+- 仔细观察的话我们是可以从Subject这一行发现干了什么的![image-20260818173325562](DC_7.assets/image-20260818173325562.png)
+
+定时执行了/opt/scripts/backups.sh脚本
+
+- 因为这个邮件的发送人和接收人都是自己，所以我们也可以直接查看收件箱，直接执行命令mail![image-20260818173529967](DC_7.assets/image-20260818173529967.png)
