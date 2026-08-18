@@ -70,3 +70,9 @@ gobuster dir -u "http://192.168.174.163" -w /usr/share/wordlists/dirbuster/direc
 ------
 
 ![image-20260818161916493](DC_7.assets/image-20260818161916493.png)接下来依次查看爆破出的目录，看看有没有信息
+
+- 查看默认页面
+
+![image-20260818162618862](DC_7.assets/image-20260818162618862.png)
+
+告诉我们不要暴力破解
