@@ -251,4 +251,5 @@ systemctl restart mysql（重启mysql，不加re是启动）
 
 - 进入admin的网页![image-20260818212622873](DC_7.assets/image-20260818212622873.png)
 
-很明显这里有一个可以上传文件的地方
+很明显这里有一个可以上传文件的地方![image-20260818212705445](DC_7.assets/image-20260818212705445.png)
+
