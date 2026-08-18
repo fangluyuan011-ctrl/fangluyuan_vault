@@ -15,6 +15,10 @@ nmap -p- --min-rate 10000 192.168.174.163
 
 ![image-20260818154533147](DC_7.assets/image-20260818154533147.png)
 
+![image-20260818161707095](DC_7.assets/image-20260818161707095.png)
+
+![image-20260818161810382](DC_7.assets/image-20260818161810382.png)
+
 我们可以得知靶机的80网页用的是Drupal的CMS框架，版本是8
 
 ## 80端口分析
@@ -62,3 +66,7 @@ gobuster dir -u "http://192.168.174.163" -w /usr/share/wordlists/dirbuster/direc
 | **跨站请求伪造（CSRF）** | 配置错误                   | Drupal 自身有令牌，但某些模块可能缺失                  |
 
 和wordpress，joomal一样，都有其专属的扫描器，Drupal用的是droopescan，但是我的配置导致我不能用，不过也可以用nmap，利用脚本nmap --script=http-drupal-enum --script-args http-drupal-enum.root="/" <target>,也可以使用，不会的话可以在nmap官网上查询
+
+------
+
+![image-20260818161916493](DC_7.assets/image-20260818161916493.png)接下来依次查看爆破出的目录，看看有没有信息
