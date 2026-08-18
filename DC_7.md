@@ -246,6 +246,9 @@ dc7user用户的密码也可以用drush进行更改，有时可能会报错连�
 drush sql-connect(测试Drush能否连接数据库)
 mysql -u dc7user -p -h localhost（直接测试mysql连接）
 systemctl status mysql（检查mysql服务状态）
-systemctl restart m'y's'q
+systemctl restart mysql（重启mysql，不加re是启动）
 ```
 
+- 进入admin的网页![image-20260818212622873](DC_7.assets/image-20260818212622873.png)
+
+很明显这里有一个可以上传文件的地方
