@@ -245,7 +245,7 @@ dc7user用户的密码也可以用drush进行更改，有时可能会报错连�
 ```
 drush sql-connect(测试Drush能否连接数据库)
 mysql -u dc7user -p -h localhost（直接测试mysql连接）
-systemctl status mysql（检查）
-systemctl 
+systemctl status mysql（检查mysql服务状态）
+systemctl restart m'y's'q
 ```
 
