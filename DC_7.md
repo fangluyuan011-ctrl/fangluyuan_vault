@@ -253,3 +253,6 @@ systemctl restart mysql（重启mysql，不加re是启动）
 
 很明显这里有一个可以上传文件的地方![image-20260818212705445](DC_7.assets/image-20260818212705445.png)
 
+![image-20260818212911913](DC_7.assets/image-20260818212911913.png)
+
+这种CMS框架都是可以装插件的，找找有没有可以上传php文件的插件
