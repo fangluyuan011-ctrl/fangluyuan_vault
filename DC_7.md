@@ -79,4 +79,4 @@ gobuster dir -u "http://192.168.174.163" -w /usr/share/wordlists/dirbuster/direc
 
 这个@DC7USER直接在搜索引擎搜索，可以直接搜索出github上的一个用户，然后进去发现包含许多源码的文件，这就是利用了社工信息收集，确实挺新颖的哈![image-20260818165156884](DC_7.assets/image-20260818165156884.png)
 
-在config.php中发现了
+在config.php中发现了用于连接mysql的php内置函数，里面有yong
