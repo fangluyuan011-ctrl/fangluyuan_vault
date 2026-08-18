@@ -231,3 +231,11 @@ drush status
 用chown尝试修改文件所属，我们没有权限，这也更加证明了backups.sh中执行的chown命令是以root权限执行的
 
 - 接下来我们要进入用户组，就要考虑从网页上传一个反弹shell，这样再拿到新的shell时就是www-data组了
+
+- 由于drush可以更改密码，因此我们可以执行
+
+```
+drush user-password admin --password="123"
+```
+
+就可以把admin用户的密码改动，然后我们就可以直接在网站上登录了（其实我不知道为什么改admin，毕竟我自己做的时候从来没见过这个用户，但是看别人的wp都是这样，也许是像wordpress这样的流行CMS默认管理员用户都是admin，所以才有这样的做法吧）
