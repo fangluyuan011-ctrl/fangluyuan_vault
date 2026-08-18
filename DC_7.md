@@ -166,6 +166,8 @@ gpg: symmetric encryption ... failed: File exists
 
 ------
 
+## gpg
+
 GPG（GNU Privacy Guard）是 OpenPGP 标准的开源实现，用于**加密、解密、数字签名和密钥管理**。它既可以进行非对称加密（公钥/私钥），也支持对称加密（密码加密）。在渗透测试中，GPG 常用于保护传输中的敏感数据、解密目标上的加密文件、以及破解弱密码保护的私钥。
 
 核心命令：
@@ -177,3 +179,55 @@ GPG（GNU Privacy Guard）是 OpenPGP 标准的开源实现，用于**加密、�
 - 破解私钥密码：`gpg2john private.key > hash && john hash`
 
 在这个靶机中有个另外的参数--pinentry-mode loopback --passphrase PickYourOwnPassword，意思是不需要交互式输入密码，直接在命令行中输入
+
+------
+
+## drush
+
+**Drush** 是 Drupal 的命令行管理工具，全称 **Drush = Drupal Shell**。它允许管理员通过终端执行各种管理任务，比如更新模块、清除缓存、管理用户、导出配置等。在渗透测试中，一旦你获得了目标服务器的 shell 或数据库访问权限，Drush 可以成为高效后渗透和提权的利器。
+
+在遇到drush中我们可以
+
+1. **获得目标服务器 Shell 后**：检查 Drupal 根目录是否存在 `vendor/bin/drush` 或 `drush` 可执行文件。
+2. **发现目标系统已经安装了 Drush**：可能在 `/usr/local/bin/drush` 或 `/usr/bin/drush`。
+3. **利用 Web 漏洞执行系统命令**：通过 Webshell 调用 `drush` 命令。
+
+| `drush status`                                       | 显示 Drupal 状态、版本、数据库信息 | 信息收集                    |
+| ---------------------------------------------------- | ---------------------------------- | --------------------------- |
+| `drush user-password <用户名> --password="<新密码>"` | 重置指定用户的密码                 | 快速获取管理员权限          |
+| `drush sql-connect`                                  | 显示数据库连接信息                 | 获取数据库凭据              |
+| `drush sql-query "<SQL>"`                            | 执行任意 SQL 查询                  | 绕过数据库权限限制          |
+| `drush php-eval "<PHP代码>"`                         | 执行任意 PHP 代码                  | 获取 Webshell、执行系统命令 |
+| `drush php-script <文件名>`                          | 执行一个 PHP 脚本文件              | 执行自定义脚本              |
+| `drush pm-list`                                      | 列出所有模块及其状态               | 发现禁用模块或潜在漏洞      |
+| `drush pm-enable <模块>`                             | 启用模块                           | 可能启用存在漏洞的模块      |
+| `drush pm-uninstall <模块>`                          | 卸载模块                           | 破坏目标环境（慎用）        |
+| `drush cache-rebuild`                                | 清除所有缓存                       | 解决修改后不生效的问题      |
+| `drush sql-dump`                                     | 导出数据库备份                     | 窃取数据                    |
+| `drush config-get <配置名>`                          | 获取配置项                         | 读取敏感配置                |
+| `drush config-set <配置名> <值>`                     | 修改配置项                         | 修改权限、开启危险功能      |
+| `drush cr`                                           | 重建缓存（通常用于 Drupal 8+）     | 清缓存                      |
+
+要运行drush命令的前提是一定要定位Drupal根目录，找到drush可执行文件，比如vendor/bin/drush，/var/www/html,可以尝试运行
+
+```
+drush status
+```
+
+查看站点版本和数据库，也能验证是否可以运行命令
+
+------
+
+因为backups.sh是root用户发送和接受的，所以我推测这个邮件的运行在root用户的定时任务中，而且很可能是以root身份运行的，所以下一步的思路是尝试修改backups.sh的内容，因为是定时任务，我们用反弹shell，然后在本地开启监听，等待拿到root
+
+- ```
+  ls -la /opt/scripts
+  ```
+
+  ![image-20260818181553692](DC_7.assets/image-20260818181553692.png)
+
+发现只有root和www-data组有权限修改，我们当前权限只能查看和执行![image-20260818181704997](DC_7.assets/image-20260818181704997.png)
+
+用chown尝试修改文件所属，我们没有权限，这也更加证明了backups.sh中执行的chown命令是以root权限执行的
+
+- 接下来我们要进入用户组，就要考虑从网页上传一个反弹shell，这样再拿到新的shell时就是www-data组了
