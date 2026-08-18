@@ -161,3 +161,5 @@ gpg: symmetric encryption ... failed: File exists
 - 查看/opt/scripts/backups.sh
 
 ![image-20260818174537209](DC_7.assets/image-20260818174537209.png)
+
+这里面有两个新命令了解一下，gpg和drush，chown适用于改变文件或文件夹的文件所有者或文件所属用户组
