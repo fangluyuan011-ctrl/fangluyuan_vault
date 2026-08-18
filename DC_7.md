@@ -163,3 +163,15 @@ gpg: symmetric encryption ... failed: File exists
 ![image-20260818174537209](DC_7.assets/image-20260818174537209.png)
 
 这里面有两个新命令了解一下，gpg和drush，chown适用于改变文件或文件夹的文件所有者或文件所属用户组
+
+------
+
+GPG（GNU Privacy Guard）是 OpenPGP 标准的开源实现，用于**加密、解密、数字签名和密钥管理**。它既可以进行非对称加密（公钥/私钥），也支持对称加密（密码加密）。在渗透测试中，GPG 常用于保护传输中的敏感数据、解密目标上的加密文件、以及破解弱密码保护的私钥。
+
+核心命令：
+
+- 生成密钥：`gpg --full-generate-key`
+- 加密（非对称）：`gpg --encrypt --recipient user file`
+- 解密：`gpg --decrypt file.gpg`
+- 对称加密：`gpg --symmetric file`
+- 破解私钥密码：`gpg2john private.key > hash && john hash`
