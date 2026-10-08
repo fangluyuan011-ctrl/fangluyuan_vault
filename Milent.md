@@ -22,14 +22,16 @@
 
 原理：include/require 支持**URL 协议**，可以直接引入外部网站的文件并执行里面代码。
 
+除了括号提示，其余的都是LFI
+
 | 伪协议                        | 什么时候适用               | 关键条件                            | 典型场景               |
 | ----------------------------- | -------------------------- | ----------------------------------- | ---------------------- |
 | **php://filter**              | 读 PHP 源码、做 LFI→RCE 链 | **无需任何配置**，默认环境就能用    | CTF 拿源码、代码审计   |
 | **file://**                   | 读本地文本文件             | 无特殊要求                          | /etc/passwd、hosts     |
 | **glob://**                   | 枚举 / 探测目录文件        | PHP 5.3+                            | 不知道文件名时爆破     |
 | **http(s)://（RFI）**         | 远程文件加载并执行         | `allow_url_include=On` + 目标能出网 | 有 VPS / 攻击机        |
-| **data://**                   | URL 内嵌代码直接 RCE       | `allow_url_include=On`              | CTF 高频、没外网服务器 |
-| **php://input**               | POST 体内容当代码执行      | `allow_url_include=On`              | 能发 POST 时           |
+| **data://**（RFI）            | URL 内嵌代码直接 RCE       | `allow_url_include=On`              | CTF 高频、没外网服务器 |
+| **php://input**(RFI)          | POST 体内容当代码执行      | `allow_url_include=On`              | 能发 POST 时           |
 | **zip://**                    | 执行压缩包内 PHP           | 服务器上**已存在** zip 文件         | 能传 zip 不能传 php    |
 | **phar://**                   | 触发反序列化攻击           | 存在 phar 文件 + 文件操作函数       | 有上传点的场景         |
 | **expect://**                 | 直接执行系统命令           | 安装了 expect 扩展                  | 极罕见                 |
