@@ -1,0 +1,10 @@
+{
+	"id": "toc-reader",
+	"name": "TOC Reader",
+	"version": "1.1.2",
+	"minAppVersion": "1.4.0",
+	"description": "Render Typora-style [TOC] as a clickable, nested table of contents in both reading view and Live Preview.",
+	"author": "muzi-xiaoren",
+	"authorUrl": "https://github.com/muzi-xiaoren",
+	"isDesktopOnly": false
+}
