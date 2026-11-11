@@ -16,3 +16,10 @@ nmap -sT -sC -sV -O -p21,1515,3535 192.168.174.195 -oA /nmapscan/tcp
 ```
 
 ![image-20261111164900241](PumpkinGarden.assets/image-20261111164900241.png)
+
+- 21端口ftp可匿名登录
+- 1515端口是http服务
+- 3535端口是ssh服务
+
+# 端口分析
+
