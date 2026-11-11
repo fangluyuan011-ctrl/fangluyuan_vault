@@ -25,3 +25,6 @@ nmap -sT -sC -sV -O -p21,1515,3535 192.168.174.195 -oA /nmapscan/tcp
 
 ## 21端口
 
+![image-20261111170010045](PumpkinGarden.assets/image-20261111170010045.png)
+
+发现一个note.txt，线索指向jack
